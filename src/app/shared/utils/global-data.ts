@@ -1,5 +1,5 @@
-import { PiGithubLogo, PiLinkedinLogo, PiMicrosoftWordLogo } from "react-icons/pi"
 import type { MenuLink, SocialLink } from "../types/types"
+import { baseSocialLinks } from "./socialBase"
 
 export const menuLinks: MenuLink[] = [
   {
@@ -19,23 +19,20 @@ export const menuLinks: MenuLink[] = [
   }
 ]
 
-export const socialLinks: SocialLink[] = [
-  {
-    id: 1,
-    title: 'Linkedin',
-    url: 'https://www.linkedin.com/in/luiz-ricardo-da-silva-tezoto-66807567/',
-    icon: PiLinkedinLogo,
-  },
-  {
-    id: 2,
-    title: 'Github',
-    url: 'https://github.com/luuizz',
-    icon: PiGithubLogo,
-  },
-  {
-    id: 3,
-    title: 'Curriculum',
-    url: 'https://docs.google.com/document/d/1uU7Zgpa1lPKDcNrMbjorFQvSqHIniF8m/edit?usp=sharing&ouid=109315793633850983973&rtpof=true&sd=true',
-    icon: PiMicrosoftWordLogo,
-  }
-]
+export const socialLinks: SocialLink[] = baseSocialLinks
+  .filter(link => link.visibleInNav !== false)
+  .map(({ id, title, url, icons }) => ({
+  id,
+  title,
+  url,
+  icon: icons.default
+}))
+
+export const socialLinksFooter: SocialLink[] = baseSocialLinks
+  .filter(link => link.visibleInNav !== false)
+  .map(({ id, title, url, icons }) => ({
+  id,
+  title,
+  url,
+  icon: icons.filled
+}))
