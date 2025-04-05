@@ -30,6 +30,9 @@ export default {
         inter: ["var(--font-inter)", "sans-serif"],
         poppins: ["var(--font-poppins)", "sans-serif"],
       },
+      fontSize: {
+        '6xl-short': '56px',
+      },
       maxWidth: {
         container: "77.875rem",
       },
