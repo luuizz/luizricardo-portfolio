@@ -6,7 +6,7 @@ import { menuLinks, socialLinks } from '@/app/shared/utils/global-data'
 
 export default function Header() {
   return (
-    <header className='sticky top-0 z-50 py-8 bg-black/80 backdrop-blur-2xl'>
+    <header className='sticky top-0 z-50 py-8 bg-black/65 backdrop-blur-2xl'>
       <Grid className='flex items-center justify-between'>
         <Link href="/" title='Ir para a página inicial'>
           <Image src="logo.svg"
