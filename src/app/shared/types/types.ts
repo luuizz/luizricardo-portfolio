@@ -12,3 +12,14 @@ export type SocialLink = {
   url: string;
   icon: IconType
 }
+
+export type SocialBase = {
+  id: number
+  title: string
+  url: string
+  icons: {
+    default: IconType
+    filled: IconType
+  },
+  visibleInNav?: boolean
+}
