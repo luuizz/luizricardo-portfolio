@@ -1,4 +1,5 @@
 import { IconType } from "react-icons";
+import type { FC, SVGProps } from "react";
 
 export type MenuLink = {
   id: number;
@@ -22,4 +23,11 @@ export type SocialBase = {
     filled: IconType
   },
   visibleInNav?: boolean
+}
+
+export type Diferencial = {
+  id: number
+  icon: FC<SVGProps<SVGSVGElement>>
+  title: string
+  description: string
 }
