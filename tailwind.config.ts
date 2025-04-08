@@ -31,6 +31,7 @@ export default {
         poppins: ["var(--font-poppins)", "sans-serif"],
       },
       fontSize: {
+        '4xl-short': '40px',
         '6xl-short': '56px',
       },
       maxWidth: {
