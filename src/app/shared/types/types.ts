@@ -31,3 +31,9 @@ export type Diferencial = {
   title: string
   description: string
 }
+
+export type Bullet = {
+  id: number;
+  icon : FC<SVGProps<SVGSVGElement>>;
+  title: string;
+}
