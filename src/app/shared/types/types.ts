@@ -37,3 +37,9 @@ export type Bullet = {
   icon : FC<SVGProps<SVGSVGElement>>;
   title: string;
 }
+
+export type MarqueeItem = {
+  id: number;
+  icon: IconType,
+  title: string;
+}
