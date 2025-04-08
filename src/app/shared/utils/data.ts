@@ -1,9 +1,12 @@
-import { Diferencial } from "../types/types";
+import { Diferencial, Bullet } from "../types/types";
 import FrontEndIcon from "@/app/assets/FrontEndIcon";
 import FrameworksIcon from "@/app/assets/FrameworksIcon";
 import CodeIcon from "@/app/assets/CodeIcon";
 import { PiDevices, PiSpeedometer, PiLightning } from "react-icons/pi";
-
+import IconProgramming from "@/app/assets/IconProgramming";
+import IconRocket from "@/app/assets/IconRocket";
+import ResponsiveIcon from "@/app/assets/ResponsiveIcon";
+import LanguageIcon from "@/app/assets/LanguageIcon";
 
 export const dadosDiferencial: Diferencial[] = [
   {
@@ -42,4 +45,27 @@ export const dadosDiferencial: Diferencial[] = [
     title: 'Usabilidade',
     description: 'Experiências pensadas para o usuário, com foco em navegação intuitiva, acessível e com propósito claro.'
   },
+]
+
+export const dadosBullets: Bullet[] = [
+  {
+    id: 1,
+    icon: IconRocket,
+    title: '+5 anos de experiência'
+  },
+  {
+    id: 2,
+    icon: LanguageIcon,
+    title: 'Desenvolvedor Front-end'
+  },
+  {
+    id: 3,
+    icon: IconProgramming,
+    title: 'Profissional Dedicado'
+  },
+  {
+    id: 4,
+    icon: ResponsiveIcon,
+    title: 'Design responsivo e acessível'
+  }
 ]
