@@ -1,16 +1,48 @@
+"use client"
+import Link from 'next/link'
+import React, { useRef } from 'react'
+import Image from 'next/image'
 import Element01 from '@/app/assets/Element'
 import Element02 from '@/app/assets/Element02'
 import Grid from '@/components/grid'
-import Image from 'next/image'
-import Link from 'next/link'
-import React from 'react'
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import Slider from './Slider'
 
 export default function SectionHero() {
+
+  const areaTextRef = useRef<HTMLDivElement>(null)
+  const circleAvatarRef = useRef<HTMLImageElement>(null)
+  const circleLogoRef = useRef<HTMLImageElement>(null)
+  const areaImagesRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    const elements = [
+      { ref: areaTextRef, xFrom: -20 },
+      { ref: circleAvatarRef, xFrom: -30 },
+      { ref: circleLogoRef, xFrom: 30 },
+      { ref: areaImagesRef, xFrom: 30 },
+    ]
+
+    const tl = gsap.timeline()
+
+    elements.forEach((el, i) => {
+      if (el.ref.current) {
+        tl.fromTo(
+          el.ref.current,
+          { opacity: 0, x: el.xFrom },
+          { opacity: 1, x: 0, duration: 1 },
+          i === 0 ? 'start' : '>-1'
+        )
+      }
+    })
+  }, [])
+
   return (
-    <section className='py-56 -mt-28 bg-black'>
+    <section className='py-56 -mt-28 bg-black overflow-hidden'>
       <Grid>
         <main className='flex items-center justify-between'>
-          <div className='flex-1 max-w-[645px]'>
+          <div className='flex-1 max-w-[645px]' ref={areaTextRef}>
             <span className='text-base/short text-brand-gray-200 font-poppins tracking-widest font-medium'>
               Olá, eu sou <strong className='text-white font-semibold'>Luiz Ricardo</strong> 👋🏻
             </span>
@@ -23,6 +55,7 @@ export default function SectionHero() {
                 alt='Foto do Luiz Ricardo'
                 width={56}
                 height={56}
+                ref={circleAvatarRef}
                 />
                 <Image
                 className='-ml-2'
@@ -30,6 +63,7 @@ export default function SectionHero() {
                 alt='Símbolo do Logo do Luiz Ricardo'
                 width={56}
                 height={56}
+                ref={circleLogoRef}
                 />
               </div>
             em Desenvolvimento Front-end
@@ -41,17 +75,10 @@ export default function SectionHero() {
               <Image className='transition-transform duration-300 group-hover:rotate-180' src={"/arrow.svg"} alt='Ícone de uma seta' width={14} height={19} />
             </Link>
           </div>
-          <div className='flex-1 max-w-[520px] relative'>
-              <Element01 className='absolute bottom-28 -right-16' />
-              <Element02 className='absolute top-16 -left-20' />
-            <div>
-              <Image
-              src="/img-01.png"
-              width={520}
-              height={673}
-              alt='Imagem de Luiz Ricardo'
-              />
-            </div>
+          <div className='flex-1 max-w-[520px] relative' ref={areaImagesRef}>
+              <Element01 className='absolute bottom-28 -right-16 z-10' />
+              <Element02 className='absolute top-16 -left-20 z-10' />
+              <Slider />
           </div>
         </main>
       </Grid>
