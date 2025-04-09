@@ -9,7 +9,7 @@ export default function CallToAction() {
   const cvLink = baseSocialLinks.find(link => link.title === 'Curriculum')
   const whatsappLink = baseSocialLinks.find(link => link.title === 'Whatsapp')
   return (
-    <section className='bg-black py-28' id='contato'>
+    <section className='bg-black py-28 scroll-mt-header' id='contato'>
       <Grid className='flex items-center justify-between'>
         <div className='flex-1 max-w-[36.9375rem]'>
           <h2 className='text-6xl-short/short mb-4 text-white'>Vamos construir algo incrível juntos.</h2>

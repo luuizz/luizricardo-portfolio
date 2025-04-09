@@ -5,7 +5,7 @@ import CardDiferencial from './CardDiferencial'
 
 export default function SectionDiferenciais() {
   return (
-    <section className='py-28'>
+    <section id='diferenciais' className='py-28 scroll-mt-header'>
       <Grid>
         <div className='flex items-center justify-between mb-16'>
           <h2 className='text-4xl/short text-brand-gray-900'>Meus diferenciais</h2>

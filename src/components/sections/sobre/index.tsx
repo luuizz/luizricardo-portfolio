@@ -8,7 +8,7 @@ import { dadosBullets } from '@/app/shared/utils/data'
 
 export default function SectionSobre() {
   return (
-    <section className='py-28'>
+    <section id='quem-sou' className='py-28 scroll-mt-header'>
       <Grid className='flex items-center justify-between gap-10'>
         <div className='flex-1 max-w-[29.25rem] relative'>
           <Image src={"/foto-destaque.png"} alt='Foto de destaque do Luiz Ricardo' width={488} height={665} />
