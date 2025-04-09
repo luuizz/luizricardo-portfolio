@@ -1,4 +1,4 @@
-import { Diferencial, Bullet, MarqueeItem } from "../types/types";
+import { Diferencial, Bullet, MarqueeItem, Projects } from "../types/types";
 import FrontEndIcon from "@/app/assets/FrontEndIcon";
 import FrameworksIcon from "@/app/assets/FrameworksIcon";
 import CodeIcon from "@/app/assets/CodeIcon";
@@ -8,6 +8,11 @@ import IconRocket from "@/app/assets/IconRocket";
 import ResponsiveIcon from "@/app/assets/ResponsiveIcon";
 import LanguageIcon from "@/app/assets/LanguageIcon";
 import { RiNextjsFill, RiPhpFill, RiWordpressFill, RiNodejsFill } from "react-icons/ri";
+import RankdoneCase from "@/app/assets/projetos/rankdone.png";
+import GlistenCase from "@/app/assets/projetos/glistenai.png";
+import LucasCase from "@/app/assets/projetos/lucas.png";
+import FlowriseCase from "@/app/assets/projetos/flowrise.png";
+import DoctorCaseCase from "@/app/assets/projetos/doctorcare.png"
 
 export const dadosDiferencial: Diferencial[] = [
   {
@@ -107,4 +112,42 @@ export const dadosMarquee: MarqueeItem[] = [
     title: 'Node.js',
     icon: RiNodejsFill
   },
+]
+
+export const dadosProjetos: Projects[] = [
+  {
+    title: 'Glisten.ai',
+    category: 'Front-end',
+    imgSrc: GlistenCase,
+    url: 'https://glistenai.com.br',
+    color: '#2C374F'
+  },
+  {
+    title: 'Lucas Mendes',
+    category: 'Design & Front-end',
+    imgSrc: LucasCase,
+    url: '#',
+    color: '#000000'
+  },
+  {
+    title: 'Flowrise',
+    category: 'Front-end',
+    imgSrc: FlowriseCase,
+    url: 'https://flowrise.luricweb.com.br/',
+    color: '#0E7490'
+  },
+  {
+    title: 'Blog Rankdone',
+    category: 'Design & Front-end',
+    imgSrc: RankdoneCase,
+    url: 'https://blog.rankdone.com.br',
+    color: '#9354F0'
+  },
+  {
+    title: 'DoctorCare',
+    category: 'Front-end',
+    imgSrc: DoctorCaseCase,
+    url: 'https://doctorcare.luricweb.com.br/',
+    color: '#1971C2'
+  }
 ]
