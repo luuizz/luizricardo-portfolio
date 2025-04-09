@@ -1,5 +1,7 @@
 import { IconType } from "react-icons";
 import type { FC, SVGProps } from "react";
+import { StaticImageData } from "next/image";
+import { Url } from "url";
 
 export type MenuLink = {
   id: number;
@@ -42,4 +44,17 @@ export type MarqueeItem = {
   id: number;
   icon: IconType,
   title: string;
+}
+
+export type Projects = {
+  title?: string;
+  category?: string;
+  imgSrc: string | StaticImageData;
+  url?: string | Url;
+  color?: string;
+}
+
+export type ModalState = {
+  active: boolean;
+  index: number;
 }
