@@ -14,6 +14,11 @@ export const menuLinks: MenuLink[] = [
   },
   {
     id: 3,
+    title: 'Porque me contratar',
+    url: '#diferenciais',
+  },
+  {
+    id: 4,
     title: 'Contato',
     url: '#contato',
   }
