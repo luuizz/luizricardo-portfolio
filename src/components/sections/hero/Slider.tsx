@@ -1,5 +1,5 @@
 'use client'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
@@ -27,7 +27,7 @@ const fotos = [
 export default function Slider() {
   const progressBar = useRef<HTMLDivElement>(null);
   const progressContent = useRef<HTMLDivElement>(null);
-  
+  const [paginationEl, setPaginationEl] = useState<HTMLElement | null>(null)
 
 
   return (
@@ -44,7 +44,7 @@ export default function Slider() {
       speed={1000}
       pagination={{
         type: 'fraction',
-        el: progressContent.current,
+        el: paginationEl,
       }}
       onAutoplayTimeLeft={(_, __, progress) => {
         if (progressBar.current) {
@@ -68,13 +68,16 @@ export default function Slider() {
             ))
           }
           <div className='relative w-full max-w-[27.375rem] -top-16 left-8 z-10'>
-            <div className='text-white font-poppins text-[0.625rem]/short' ref={progressContent}>
+            <div className='text-white font-poppins text-[0.625rem]/short' ref={(el) => {
+              progressContent.current = el
+              setPaginationEl(el)
+            }}>
               <span className='!text-white'></span>
             </div>
             <div className='mt-2 bg-brand-gray-700 w-full h-[0.125rem] relative overflow-hidden'>
               <div
                 ref={progressBar}
-                className='absolute left-0 top-0 h-full w-full bg-white origin-left scale-x-0 transition-transform duration-100'
+                className='absolute left-0 top-0 h-full w-full bg-white origin-left scale-x-0 transition-transform duration-300'
                 style={{
                   transform: 'scaleX(var(--progress))',
                   transition: 'transform 0.1s linear',
