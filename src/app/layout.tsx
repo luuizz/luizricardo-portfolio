@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
+    <html className="scroll-smooth" lang="pt-br">
       <body
         className={`${inter.variable} ${poppins.variable} antialiased`}
       >
