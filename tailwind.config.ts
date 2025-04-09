@@ -40,6 +40,15 @@ export default {
       lineHeight: {
         'short': '120%',
         'large': '150%',
+      },
+      transitionProperty: {
+        'top': 'top',
+      },
+      transitionTimingFunction: {
+        'transition-project-cards': 'cubic-bezier(0.76, 0, 0.24, 1)',
+      },
+      scrollMargin: {
+        'header': 'var(--header-height)'
       }
     },
   },
