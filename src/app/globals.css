@@ -6,6 +6,16 @@
   font-family: var(--font-inter);
 }
 
+:root {
+  --header-height: 105px;
+}
+
 :where(h1, h2, h3, h4, h5, h6) {
   font-family: var(--font-poppins);
+}
+
+@layer components {
+  .project-cursor {
+    @apply pointer-events-none absolute z-10 flex h-20 w-20 items-center justify-center rounded-full bg-brand-primary-default font-poppins text-xs/short uppercase text-black;
+  }
 }
