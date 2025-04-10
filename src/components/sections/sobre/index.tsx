@@ -1,20 +1,33 @@
+'use client'
+
+import React, { useRef } from 'react'
 import BadgeIcon from '@/app/assets/BadgeIcon'
 import Grid from '@/components/grid'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 import Bullets from './Bullets'
 import { dadosBullets } from '@/app/shared/utils/data'
+import { useScrollReveal } from '@/hooks/useScrollReveal'
 
 export default function SectionSobre() {
+
+  const leftAreaRef = useRef<HTMLDivElement>(null);
+  const rightAreaRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+
+  useScrollReveal(leftAreaRef, { direction: 'left', duration: 1 })
+  useScrollReveal(rightAreaRef, { direction: 'right', duration: 1 })
+  useScrollReveal(cardsRef, { direction: 'bottom', duration: 1, stagger: 0.2 })
+
   return (
     <section id='quem-sou' className='py-28 scroll-mt-header'>
       <Grid className='flex items-center justify-between gap-10'>
-        <div className='flex-1 max-w-[29.25rem] relative'>
+        <div ref={leftAreaRef} className='flex-1 max-w-[29.25rem] relative'>
           <Image src={"/foto-destaque.png"} alt='Foto de destaque do Luiz Ricardo' width={488} height={665} />
           <BadgeIcon className='absolute top-1/2 -translate-y-1/2 -right-8'  />
         </div>
-        <div className='flex-1 max-w-[32rem]'>
+        <div ref={rightAreaRef} className='flex-1 max-w-[32rem]'>
           <h4 className='mb-6 text-lg/short font-inter font-semibold text-black'>Olá, prazer 👋🏻</h4>
           <h2 className='text-4xl-short/short mb-1'>Luiz Ricardo</h2>
           <h5 className='mb-10 text-lg/short text-black font-inter font-semibold'>Desenvolvedor Front end</h5>
@@ -25,7 +38,6 @@ export default function SectionSobre() {
           <div className='mt-14 flex flex-wrap gap-4'>
             {
               dadosBullets.map((item) => (
-                
                 <Bullets key={item.id} {...item} />
               ))
             }

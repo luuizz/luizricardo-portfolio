@@ -8,6 +8,7 @@ type ItemProjectProps = Projects & {
 }
 
 export default function ItemProject({ title, category, url, setModal, index }:ItemProjectProps) {
+
   return (
     <Link href={url ?? '#'}
     className='flex w-full justify-between items-center py-14 px-28 border-t last:border-b border-s-neutral-100 hover:opacity-50 transition-opacity duration-300 group cursor-pointer' 
