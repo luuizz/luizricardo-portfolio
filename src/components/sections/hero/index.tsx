@@ -52,7 +52,7 @@ export default function SectionHero() {
     <section className='py-40 lg:py-56 -mt-28 bg-black overflow-hidden'>
       <Grid>
         <main className='flex flex-col lg:flex-row items-center justify-between gap-10'>
-          <div className='flex-1 max-w-3xl lg:text-left text-center  lg:max-w-[645px] ' ref={areaTextRef}>
+          <div className='flex-1 max-w-full sm:max-w-3xl lg:text-left text-center  lg:max-w-[645px] ' ref={areaTextRef}>
             <span className='text-base/short text-brand-gray-200 font-poppins tracking-widest font-medium'>
               Olá, eu sou <strong className='text-white font-semibold'>Luiz Ricardo</strong> 👋🏻
             </span>
