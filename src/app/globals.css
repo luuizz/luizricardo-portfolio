@@ -18,4 +18,28 @@
   .project-cursor {
     @apply pointer-events-none absolute z-10 flex h-20 w-20 items-center justify-center rounded-full bg-brand-primary-default font-poppins text-xs/short uppercase text-black;
   }
+
+  .burger::before,
+  .burger::after {
+    @apply relative mx-auto block h-px w-2/5 bg-black transition-transform;
+    content: "";
+  }
+
+  .burger::before {
+    top: 5px;
+  }
+
+  .burger::after {
+    top: -5px;
+  }
+
+  .burgerActive::before {
+    transform: rotate(-45deg);
+    top: 0;
+  }
+
+  .burgerActive::after {
+    transform: rotate(45deg);
+    top: -1px;
+  }
 }
