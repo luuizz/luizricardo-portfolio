@@ -49,6 +49,9 @@ export default {
       },
       scrollMargin: {
         'header': 'var(--header-height)'
+      },
+      height: {
+        'curve-svg': 'calc(100% + 300px);'
       }
     },
   },
