@@ -33,7 +33,7 @@ export default function Header() {
               menuLinks.map((item, index) => (
                 <li key={index}>
                   <Link 
-                  className={`font-normal transition-colors duration-300 text-base/short hover:text-brand-primary-default ${scrolled ? 'text-brand-gray-800' : 'text-white'}`} 
+                  className={`font-normal transition-colors duration-300 text-base/short  ${scrolled ? 'text-brand-gray-800 hover:text-black' : 'text-white hover:text-brand-primary-default'}`} 
                   href={item.url} 
                   title={item.title}>
                     {item.title}
@@ -48,7 +48,7 @@ export default function Header() {
               socialLinks.map((item, index) => (
                 <li key={index}>
                   <Link target='_blank' className='group' href={item.url} title={item.title}>
-                    <item.icon className={`transition-colors duration-300 text-white hover:group-hover:fill-brand-primary-default ${scrolled ? 'fill-brand-gray-800' : 'fill-white'}`} size={32} />
+                    <item.icon className={`transition-colors duration-300 text-white  ${scrolled ? 'fill-brand-gray-800 hover:group-hover:fill-black' : 'fill-white hover:group-hover:fill-brand-primary-default'}`} size={32} />
                   </Link>
                 </li>
               ))
