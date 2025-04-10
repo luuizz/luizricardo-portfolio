@@ -126,7 +126,7 @@ export const dadosProjetos: Projects[] = [
     title: 'Lucas Mendes',
     category: 'Design & Front-end',
     imgSrc: LucasCase,
-    url: '#',
+    url: 'https://lucasmendes.luricweb.com.br/',
     color: '#000000'
   },
   {
