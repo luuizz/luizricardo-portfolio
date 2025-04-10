@@ -42,6 +42,7 @@ export default function Slider() {
       effect={'fade'}
       grabCursor={true}
       speed={1000}
+      slidesPerView={1}
       pagination={{
         type: 'fraction',
         el: paginationEl,
@@ -67,7 +68,7 @@ export default function Slider() {
             </SwiperSlide>
             ))
           }
-          <div className='relative w-full max-w-[27.375rem] -top-16 left-8 z-10'>
+          <div className='relative w-full max-w-[90%] sm:max-w-[27.375rem] -top-16 left-2/4 -translate-x-2/4 sm:translate-x-0 sm:left-8 z-10'>
             <div className='text-white font-poppins text-[0.625rem]/short' ref={(el) => {
               progressContent.current = el
               setPaginationEl(el)
