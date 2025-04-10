@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { menuLinks, socialLinks } from '@/app/shared/utils/global-data'
 
+
 export default function Header() {
   return (
     <header className='sticky top-0 z-50 py-8 bg-black/65 backdrop-blur-2xl'>
@@ -15,7 +16,6 @@ export default function Header() {
           height={41}
           />
         </Link>
-
         <nav className='flex items-center justify-between gap-4'>
           <ul className='flex items-center gap-6'>
             {
@@ -29,7 +29,6 @@ export default function Header() {
             }
           </ul>
           <div className='w-0.5 h-6 bg-brand-gray-700' />
-
           <ul className='flex items-center gap-3'>
             {
               socialLinks.map((item, index) => (
