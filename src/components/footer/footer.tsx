@@ -10,13 +10,13 @@ export default function Footer() {
   return (
     <footer className='py-10 bg-black'>
       <Grid>
-        <div className='flex items-center justify-between mb-10 pb-10 border-b border-brand-gray-700'>
+        <div className='flex sm:flex-row flex-col gap-6 items-center justify-between mb-10 pb-10 border-b border-brand-gray-700'>
           <Image src="/logo.svg" alt='Logo do Luiz Ricardo' width={210} height={54} />
-          <Link href="mailto:luu.izz@hotmail.com" target='_blank' className='text-brand-gray-100 font-poppins text-2xl/short font-semibold transition-colors duration-300 hover:text-brand-primary-default'>luu.izz@hotmail.com</Link>
+          <Link href="mailto:luu.izz@hotmail.com" target='_blank' className='text-brand-gray-100 font-poppins text-xl sm:text-2xl/short font-semibold transition-colors duration-300 hover:text-brand-primary-default'>luu.izz@hotmail.com</Link>
         </div>
-        <div className='flex items-center justify-between'>
+        <div className='flex flex-col md:flex-row gap-10 items-center justify-between'>
           <span className='text-white text-sm/large'>©{year} | São Paulo – SP</span>
-          <ul className='flex items-center gap-6'>
+          <ul className='flex flex-wrap md:justify-start justify-center items-center gap-6'>
             {
               socialLinksFooter.map((item) => (
                 <li key={item.id}>
