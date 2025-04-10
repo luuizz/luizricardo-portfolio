@@ -14,12 +14,22 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    document.body.style.overflow = 'hidden'; 
+    const isDesktop = window.innerWidth >= 768;
+    if (!isDesktop) {
+      // Se for mobile, pula o loader
+      setIsLoading(false);
+      document.body.style.overflow = 'auto';
+      document.body.style.cursor = 'default';
+      return;
+    }
+  
+    // Executa o loader normalmente no desktop
+    document.body.style.overflow = 'hidden';
     document.body.style.cursor = 'wait';
   
     const timer = setTimeout(() => {
       setIsLoading(false);
-      document.body.style.overflow = 'auto'; 
+      document.body.style.overflow = 'auto';
       document.body.style.cursor = 'default';
       window.scrollTo(0, 0);
     }, 2000);

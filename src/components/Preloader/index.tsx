@@ -28,16 +28,16 @@ useEffect( () => {
   const curve = {
     initial: {
         d: initialPath,
-        transition: {duration: 1, ease: [0.76, 0, 0.24, 1]}
+        transition: {duration: 0.7, ease: [0.76, 0, 0.24, 1]}
     },
     exit: {
         d: targetPath,
-        transition: {duration: 1, ease: [0.76, 0, 0.24, 1], delay: 0.5}
+        transition: {duration: 0.7, ease: [0.76, 0, 0.24, 1], delay: 0.5}
     }
 }
 
   return (
-    <motion.div variants={slideUp} initial="initial" exit="exit" className="h-screen w-screen flex items-center justify-center fixed z-[99] bg-brand-gray-900">
+    <motion.div variants={slideUp} initial="initial" exit="exit" className="hidden  h-screen w-screen lg:flex items-center justify-center fixed z-[99] bg-brand-gray-900">
     {dimension.width > 0 && 
     <>
         <motion.p
@@ -48,7 +48,7 @@ useEffect( () => {
           <span className='block w-3 h-3 bg-white rounded-full mr-3'></span>
           {words[index]}
         </motion.p>
-        <svg className='absolute top-0 w-full h-curve-svg'>
+        <svg className='hidden lg:block absolute top-0 w-full h-curve-svg'>
             <motion.path className='fill-brand-gray-900' variants={curve} initial="initial" exit="exit"></motion.path>
         </svg>
     </>
