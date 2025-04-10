@@ -10,44 +10,47 @@ import { AnimatePresence } from "motion/react";
 import PreloaderAnimation from "@/components/Preloader";
 
 export default function Home() {
-
   const [isLoading, setIsLoading] = useState(true);
+  const [shouldRenderPreloader, setShouldRenderPreloader] = useState(false);
 
   useEffect(() => {
-    const isDesktop = window.innerWidth >= 768;
+    const isDesktop = window.innerWidth >= 1024;
+
     if (!isDesktop) {
-      // Se for mobile, pula o loader
       setIsLoading(false);
+      setShouldRenderPreloader(false);
       document.body.style.overflow = 'auto';
       document.body.style.cursor = 'default';
       return;
     }
-  
-    // Executa o loader normalmente no desktop
+
+    // Sinaliza que pode renderizar o preloader
+    setShouldRenderPreloader(true);
     document.body.style.overflow = 'hidden';
     document.body.style.cursor = 'wait';
-  
+
     const timer = setTimeout(() => {
       setIsLoading(false);
       document.body.style.overflow = 'auto';
       document.body.style.cursor = 'default';
       window.scrollTo(0, 0);
     }, 2000);
-  
+
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
-    <AnimatePresence mode='wait'>
-      {isLoading && <PreloaderAnimation />}
-    </AnimatePresence>
+      <AnimatePresence mode="wait">
+        {shouldRenderPreloader && isLoading && <PreloaderAnimation />}
+      </AnimatePresence>
+
       <SectionHero />
-      <SectionSobre />
-      <SectionMarquee />
-      <SectionProjetos />
-      <SectionDiferenciais />
-      <CallToAction />
+      {/* <SectionSobre /> */}
+      {/* <SectionMarquee /> */}
+      {/* <SectionProjetos /> */}
+      {/* <SectionDiferenciais /> */}
+      {/* <CallToAction /> */}
     </>
   );
 }
