@@ -17,7 +17,7 @@ export default function SectionHero() {
   const circleLogoRef = useRef<HTMLImageElement>(null)
   const areaImagesRef = useRef<HTMLDivElement>(null)
 
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
