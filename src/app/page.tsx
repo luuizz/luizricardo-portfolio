@@ -46,7 +46,7 @@ export default function Home() {
       </AnimatePresence>
 
       <SectionHero />
-      {/* <SectionSobre /> */}
+      <SectionSobre />
       {/* <SectionMarquee /> */}
       {/* <SectionProjetos /> */}
       {/* <SectionDiferenciais /> */}
