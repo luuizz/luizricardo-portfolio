@@ -49,7 +49,7 @@ export default function Home() {
       <SectionSobre />
       <SectionMarquee />
       <SectionProjetos />
-      {/* <SectionDiferenciais /> */}
+      <SectionDiferenciais />
       <CallToAction />
     </>
   );
