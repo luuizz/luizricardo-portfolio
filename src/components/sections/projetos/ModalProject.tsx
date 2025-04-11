@@ -65,7 +65,7 @@ export default function ModalProject({ modal, projects }: ModalProjectProps) {
   return (
     <>
     <motion.div 
-    className='absolute bg-white overflow-hidden flex items-center justify-center w-[25rem] h-[21.875rem] pointer-events-none'
+    className='absolute hidden bg-white overflow-hidden lg:flex items-center justify-center w-[25rem] h-[21.875rem] pointer-events-none'
     ref={modalRef}
     variants={scaleAnimation} 
     initial="initial" 
@@ -91,12 +91,12 @@ export default function ModalProject({ modal, projects }: ModalProjectProps) {
     </motion.div>
     <motion.div 
     ref={cursorRef}
-    className='project-cursor'
+    className='project-cursor hidden lg:flex'
     variants={scaleAnimation} initial="initial" 
     animate={active ? "enter" : "closed"} />
     <motion.div 
     ref={cursorLabelRef}
-    className='project-cursor bg-transparent' 
+    className='project-cursor hidden lg:flex bg-transparent' 
     variants={scaleAnimation} initial="initial" 
     animate={active ? "enter" : "closed"}>Ver site</motion.div>
     </>

@@ -47,8 +47,8 @@ export default function Home() {
 
       <SectionHero />
       <SectionSobre />
-      {/* <SectionMarquee /> */}
-      {/* <SectionProjetos /> */}
+      <SectionMarquee />
+      <SectionProjetos />
       {/* <SectionDiferenciais /> */}
       {/* <CallToAction /> */}
     </>

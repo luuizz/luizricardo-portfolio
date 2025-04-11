@@ -19,13 +19,13 @@ export default function SectionProjetos() {
   return (
     <section id='projetos' className='py-28 scroll-mt-header'>
       <Grid>
-        <div className='flex items-start justify-between mb-16'>
-          <h2 ref={leftAreaRef} className='text-6xl/short text-brand-gray-900 w-[28.125rem] text-balance'>Projetos mais recentes</h2>
-          <div ref={rightAreaRef} className='flex flex-col gap-6'>
+        <div className='overflow-hidden flex flex-col md:flex-row items-center text-center md:text-left md:items-start justify-between mb-10 lg:mb-16 gap-8'>
+          <h2 ref={leftAreaRef} className='text-4xl/short sm:text-5xl lg:text-6xl text-brand-gray-900 w-auto sm:w-[28.125rem] text-balance'>Projetos mais recentes</h2>
+          <div ref={rightAreaRef} className='flex items-center md:items-start flex-col gap-6'>
             <div className='w-10 h-10 flex items-center justify-center bg-brand-primary-default/50 rounded-full'>
               <PiRocketLaunch size={16} />
             </div>
-            <p className='w-96 text-xl/large text-brand-gray-600'>Cada projeto é pensado para gerar impacto real, combinando estética, performance e propósito.</p>
+            <p className='w-full sm:w-96 text-base/large xl:text-xl text-brand-gray-600'>Cada projeto é pensado para gerar impacto real, combinando estética, performance e propósito.</p>
           </div>
         </div>
         <div className='relative'>
