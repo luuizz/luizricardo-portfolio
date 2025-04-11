@@ -140,7 +140,7 @@ export const dadosProjetos: Projects[] = [
     title: 'Blog Rankdone',
     category: 'Design & Front-end',
     imgSrc: RankdoneCase,
-    url: 'https://blog.rankdone.com.br',
+    url: 'https://blog.rankdone.com',
     color: '#9354F0'
   },
   {
