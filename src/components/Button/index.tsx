@@ -19,7 +19,7 @@ export default function Button({
   isLink = true,
   className = '',
 }: ButtonProps) {
-  const baseStyles = 'inline-block py-4 px-8 flex items-center gap-3 text-base/short rounded-md transition-colors duration-300'
+  const baseStyles = 'inline-block text-center py-4 px-8 flex items-center gap-3 text-base/short rounded-md transition-colors duration-300'
   const filled = 'bg-brand-primary-default text-black hover:bg-brand-primary-dark'
   const outline = 'border border-brand-primary-default text-brand-primary-default hover:bg-brand-primary-default hover:text-black'
 
