@@ -6,8 +6,8 @@ import SectionHero from "@/components/sections/hero";
 import SectionMarquee from "@/components/sections/marquee";
 import SectionProjetos from "@/components/sections/projetos";
 import SectionSobre from "@/components/sections/sobre";
-import { AnimatePresence } from "motion/react";
 import PreloaderAnimation from "@/components/Preloader";
+import { AnimatePresence } from "motion/react";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
