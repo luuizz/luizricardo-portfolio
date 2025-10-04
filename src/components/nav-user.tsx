@@ -10,14 +10,9 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar,
-} from "@/components/ui/sidebar";
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabaseBrowser } from "@/lib/supabase/client";
@@ -36,6 +31,7 @@ export function NavUser({
 
   async function handleLogout() {
     await supabaseBrowser.auth.signOut();
+    router.refresh();
     router.push("/auth/login");
   }
 
@@ -96,12 +92,13 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <Link href="/auth/login">
-              <DropdownMenuItem className={"cursor-pointer"}>
-                <LogOut className="mr-2" />
-                <span>Log out</span>
-              </DropdownMenuItem>
-            </Link>
+            <DropdownMenuItem
+              className={"cursor-pointer"}
+              onClick={handleLogout} // Chama a função que desconecta e redireciona
+            >
+              <LogOut className="mr-2" />
+              <span>Log out</span>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
