@@ -1,48 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const publicRoutes = [
-  { path: "/", whenAuthenticated: "next" }, // raiz pública
-  { path: "/login", whenAuthenticated: "redirect" },
-  { path: "/sign-in", whenAuthenticated: "redirect" },
-];
-
-const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/"; // agora manda pra raiz
+const PRIVATE_PREFIX = "/admin"; // tudo que começa com /admin é restrito
+const REDIRECT_WHEN_NOT_AUTHENTICATED = "/auth/login";
 
 export default function middleware(request: NextRequest) {
-  const path = request.nextUrl.pathname;
-  const publicRoute = publicRoutes.find((route) => route.path === path);
-
+  const { pathname } = request.nextUrl;
   const authToken = request.cookies.get("token");
 
-  // 🔹 Se NÃO estiver logado e tentando acessar rota pública → deixa passar
-  if (!authToken && publicRoute) {
-    return NextResponse.next();
+  // 🔹 Só aplica regra se a rota começar com /admin
+  if (pathname.startsWith(PRIVATE_PREFIX)) {
+    // Se não estiver logado → manda pro login
+    if (!authToken) {
+      const redirectUrl = request.nextUrl.clone();
+      redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED;
+      return NextResponse.redirect(redirectUrl);
+    }
   }
 
-  // 🔹 Se NÃO estiver logado e rota NÃO for pública → redireciona pra raiz
-  if (!authToken && !publicRoute) {
-    const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE;
-    return NextResponse.redirect(redirectUrl);
-  }
-
-  // 🔹 Se estiver logado e acessar rota pública (login/sign-in) → manda pra raiz
-  if (
-    authToken &&
-    publicRoute &&
-    publicRoute.whenAuthenticated === "redirect"
-  ) {
-    const redirectUrl = request.nextUrl.clone();
-    redirectUrl.pathname = "/";
-    return NextResponse.redirect(redirectUrl);
-  }
-
-  // 🔹 Se estiver logado em rota privada → segue
+  // 🔹 Se não cair no caso acima → rota é pública
   return NextResponse.next();
 }
 
 export const config = {
   matcher: [
+    // aplica em todas rotas exceto assets
     "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
   ],
 };
