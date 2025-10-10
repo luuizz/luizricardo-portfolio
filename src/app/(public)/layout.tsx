@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Luiz Ricardo | Desenvolvedor Front-end",
   description:
-    "Olá, sou o Luiz Ricardo, um desenvolvedor front-end apaixonado por criar experiências digitais incriveis. Neste portfólio, você poderá explorar meus trabalhos criativos, recomendações e habilidades adquiridas ao longo da minha jornada profissional. Sinta-se à vontade para se conectar comigo no LinkedIn e explorar meus projetos no Github para ter uma visão mais aprofundada do meu expertise técnico e criativo.",
+    "Olá, sou o Luiz Ricardo, um desenvolvedor front-end apaixonado por criar experiências digitais incriveis. Neste portfólio, você poderá explorar meus trabalhos criativos, recomendações e habilidades adquiridas ao longo da minha jornada profissional. Sinta-se à vontade para se conectar comigo no LinkedIn e explorar meus projects no Github para ter uma visão mais aprofundada do meu expertise técnico e criativo.",
   keywords:
     "desenvolvedor front-end, react, angular, profissional programador, programação front-end, recrutador front-end, typescript, nodejs",
   authors: [{ name: "Luiz Ricardo", url: "https://github.com/luuizz" }],
