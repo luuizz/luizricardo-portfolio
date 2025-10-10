@@ -41,7 +41,6 @@ export function NavMain({
             className="group/collapsible"
           >
             <SidebarMenuItem>
-              {/* Botão principal do grupo */}
               <CollapsibleTrigger asChild>
                 <SidebarMenuButton tooltip={item.title} asChild>
                   {item.url && item.url !== "#" ? (
