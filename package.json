@@ -29,7 +29,7 @@
     "init": "^0.1.2",
     "lucide-react": "^0.544.0",
     "motion": "^12.6.3",
-    "next": "15.1.6",
+    "next": "^15.5.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-fast-marquee": "^1.6.5",
@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
+    "@types/node": "^24.7.0",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
