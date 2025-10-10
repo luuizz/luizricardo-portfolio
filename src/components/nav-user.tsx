@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, ChevronsUpDown, LogOut, SettingsIcon } from "lucide-react";
+import { ChevronsUpDown, LogOut, SettingsIcon } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -21,6 +21,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { ROUTES } from "@/lib/routes";
 
 export function NavUser({
   user,
@@ -82,7 +83,7 @@ export function NavUser({
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <Link
-                href={"dashboard/settings"}
+                href={ROUTES.settings}
                 title="Ir para página de configurações"
                 className={"cursor-pointer"}
               >
@@ -91,15 +92,11 @@ export function NavUser({
                   Configurações
                 </DropdownMenuItem>
               </Link>
-              <DropdownMenuItem>
-                <Bell />
-                Notificações
-              </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               className={"cursor-pointer"}
-              onClick={handleLogout} // Chama a função que desconecta e redireciona
+              onClick={handleLogout}
             >
               <LogOut className="mr-2" />
               <span>Log out</span>

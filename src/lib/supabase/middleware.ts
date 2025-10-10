@@ -21,8 +21,6 @@ export async function updateSession(request: NextRequest) {
       },
     },
   );
-
-  // Atualiza sessão se necessário
   await supabase.auth.getUser();
 
   return response;
