@@ -1,53 +1,40 @@
 "use client";
 
 import * as React from "react";
-import {
-  AudioWaveform,
-  BookOpen,
-  Command,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-  VideoIcon,
-} from "lucide-react";
+import { BookOpen, FileImage, SquareTerminal, VideoIcon } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
+  SidebarHeader,
   SidebarRail,
-} from "@/components/ui/sidebar"; // This is sample data.
+} from "@/components/ui/sidebar";
+import { ROUTES } from "@/lib/routes";
 
-// This is sample data.
 const data = {
   user: {
     name: "Luiz Ricardo",
     email: "contato@luricweb.com.br",
     avatar: "/avatars/shadcn.jpg",
   },
-  teams: [
-    {
-      name: "Luric.web Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Luric.web Corp",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
   navMain: [
+    {
+      title: "Mídia",
+      url: "#",
+      icon: FileImage,
+      items: [
+        {
+          title: "Ver Galeria",
+          url: ROUTES.midia.root,
+        },
+        {
+          title: "Fazer Upload",
+          url: ROUTES.midia.novo,
+        },
+      ],
+    },
     {
       title: "Projetos",
       url: "#",
@@ -56,15 +43,15 @@ const data = {
       items: [
         {
           title: "Criar um projeto",
-          url: "#",
+          url: ROUTES.projetos.novo,
         },
         {
-          title: "Ver todos os projetos",
-          url: "#",
+          title: "Ver todos os projects",
+          url: ROUTES.projetos.root,
         },
         {
           title: "Categorias",
-          url: "#",
+          url: ROUTES.projetos.categorias,
         },
       ],
     },
@@ -75,15 +62,15 @@ const data = {
       items: [
         {
           title: "Criar Novo",
-          url: "#",
+          url: ROUTES.blog.novo,
         },
         {
           title: "Ver todos os Posts",
-          url: "#",
+          url: ROUTES.blog.root,
         },
         {
           title: "Categorias",
-          url: "#",
+          url: ROUTES.blog.categorias,
         },
       ],
     },
@@ -94,7 +81,7 @@ const data = {
       items: [
         {
           title: "Tutoriais",
-          url: "#",
+          url: ROUTES.videos.tutoriais,
         },
         {
           title: "Canal Youtube",
@@ -102,55 +89,15 @@ const data = {
         },
       ],
     },
-    {
-      title: "Configurações",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
-    },
   ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarFooter>
+      <SidebarHeader>
         <NavUser user={data.user} />
-      </SidebarFooter>
+      </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
