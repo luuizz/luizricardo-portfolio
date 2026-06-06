@@ -23,13 +23,35 @@ export async function GET() {
 // POST - Cria um novo post
 // ===================================================
 export async function POST(request: Request) {
-  const supabase = await createSupabaseServerClient(); // ✅ await
+  const supabase = await createSupabaseServerClient();
   const body = await request.json();
 
-  const { data, error } = await supabase.from("posts").insert([body]).select();
+  // ✅ Pegamos o ID do usuário autenticado
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json(
+      { message: "Usuário não autenticado." },
+      { status: 401 },
+    );
+  }
+
+  const payload = {
+    ...body,
+    status: body.status ?? "draft",
+    user_id: user.id,
+  };
+
+  const { data, error } = await supabase
+    .from("posts")
+    .insert([payload])
+    .select()
+    .single();
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return NextResponse.json({ message: error.message }, { status: 400 });
   }
 
   return NextResponse.json(data, { status: 201 });
@@ -39,22 +61,34 @@ export async function POST(request: Request) {
 // PUT - Atualiza um post
 // ===================================================
 export async function PUT(request: Request) {
-  const supabase = await createSupabaseServerClient(); // ✅ await
+  const supabase = await createSupabaseServerClient();
   const body = await request.json();
-  const { id, ...updates } = body;
 
-  if (!id) {
-    return NextResponse.json({ error: "Missing post ID" }, { status: 400 });
+  const { id, slug, ...updates } = body;
+
+  if (!id && !slug) {
+    return NextResponse.json(
+      { message: "Missing post ID or slug" },
+      { status: 400 },
+    );
   }
 
-  const { data, error } = await supabase
-    .from("posts")
-    .update(updates)
-    .eq("id", id)
-    .select();
+  let query = supabase.from("posts").update({
+    ...updates,
+    updated_at: new Date().toISOString(), // ✅ força atualização
+  });
+
+  // ✅ aplica WHERE conforme o identificador disponível
+  if (id) {
+    query = query.eq("id", id);
+  } else if (slug) {
+    query = query.eq("slug", slug);
+  }
+
+  const { data, error } = await query.select().single();
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return NextResponse.json({ message: error.message }, { status: 400 });
   }
 
   return NextResponse.json(data, { status: 200 });

@@ -1,107 +1,120 @@
 "use client";
 
 import * as React from "react";
-import { BookOpen, FileImage, SquareTerminal, VideoIcon } from "lucide-react";
+import {
+  BookOpen,
+  BookText,
+  BookUser,
+  FileImage,
+  FolderKanban,
+  Settings,
+  Video,
+} from "lucide-react";
 
-import { NavMain } from "@/components/nav-main";
+import { NavMain, type NavItem } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarHeader,
   SidebarRail,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { ROUTES } from "@/lib/routes";
 
-const data = {
-  user: {
-    name: "Luiz Ricardo",
-    email: "contato@luricweb.com.br",
-    avatar: "/avatars/shadcn.jpg",
+const navItems: NavItem[] = [
+  {
+    sectionLabel: "Conteúdo",
+    title: "Projetos",
+    url: ROUTES.projetos.root,
+    icon: FolderKanban,
+    items: [
+      { title: "Novo Projeto", url: ROUTES.projetos.novo },
+      { title: "Ver Projetos", url: ROUTES.projetos.root },
+      { title: "Tipos de Projeto", url: ROUTES.projetos.categorias },
+    ],
   },
-  navMain: [
-    {
-      title: "Mídia",
-      url: "#",
-      icon: FileImage,
-      items: [
-        {
-          title: "Ver Galeria",
-          url: ROUTES.midia.root,
-        },
-        {
-          title: "Fazer Upload",
-          url: ROUTES.midia.novo,
-        },
-      ],
-    },
-    {
-      title: "Projetos",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "Criar um projeto",
-          url: ROUTES.projetos.novo,
-        },
-        {
-          title: "Ver todos os projects",
-          url: ROUTES.projetos.root,
-        },
-        {
-          title: "Categorias",
-          url: ROUTES.projetos.categorias,
-        },
-      ],
-    },
-    {
-      title: "Blog",
-      url: "#",
-      icon: BookOpen,
-      items: [
-        {
-          title: "Criar Novo",
-          url: ROUTES.blog.novo,
-        },
-        {
-          title: "Ver todos os Posts",
-          url: ROUTES.blog.root,
-        },
-        {
-          title: "Categorias",
-          url: ROUTES.blog.categorias,
-        },
-      ],
-    },
-    {
-      title: "Videos",
-      url: "#",
-      icon: VideoIcon,
-      items: [
-        {
-          title: "Tutoriais",
-          url: ROUTES.videos.tutoriais,
-        },
-        {
-          title: "Canal Youtube",
-          url: "#",
-        },
-      ],
-    },
-  ],
+  {
+    sectionLabel: "Conteúdo",
+    title: "Blog",
+    url: ROUTES.blog.root,
+    icon: BookOpen,
+    items: [
+      { title: "Novo Post", url: ROUTES.blog.novo },
+      { title: "Ver Posts", url: ROUTES.blog.root },
+      { title: "Categorias", url: ROUTES.blog.categorias },
+    ],
+  },
+  {
+    sectionLabel: "Conteúdo",
+    title: "Vídeos",
+    url: ROUTES.videos.root,
+    icon: Video,
+    items: [
+      { title: "Todos os Vídeos", url: ROUTES.videos.root },
+      { title: "Novo Vídeo", url: ROUTES.videos.novo },
+      { title: "Tutoriais", url: ROUTES.videos.tutoriais },
+    ],
+  },
+  {
+    sectionLabel: "Gestão",
+    title: "Clientes",
+    url: ROUTES.clientes.root,
+    icon: BookUser,
+    items: [
+      { title: "Novo Cliente", url: ROUTES.clientes.novo },
+      { title: "Ver Clientes", url: ROUTES.clientes.root },
+      { title: "Setores", url: ROUTES.clientes.setor },
+    ],
+  },
+  {
+    sectionLabel: "Gestão",
+    title: "Orçamentos",
+    url: ROUTES.orcamentos.root,
+    icon: BookText,
+    items: [
+      { title: "Novo Orçamento", url: ROUTES.orcamentos.novo },
+      { title: "Ver Orçamentos", url: ROUTES.orcamentos.root },
+    ],
+  },
+  {
+    sectionLabel: "Gestão",
+    title: "Biblioteca de Mídia",
+    url: ROUTES.midia.root,
+    icon: FileImage,
+    items: [
+      { title: "Galeria", url: ROUTES.midia.root },
+      { title: "Fazer Upload", url: ROUTES.midia.novo },
+    ],
+  },
+  {
+    sectionLabel: "Sistema",
+    title: "Configurações",
+    url: ROUTES.settings,
+    icon: Settings,
+    items: [{ title: "Conta & Sistema", url: ROUTES.settings }],
+  },
+];
+
+const user = {
+  name: "Luiz Ricardo",
+  email: "contato@luricweb.com.br",
+  avatar: "/avatars/shadcn.jpg",
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarHeader>
-      <SidebarContent>
-        <NavMain items={data.navMain} />
+      <SidebarSeparator />
+      <SidebarContent className="pt-0">
+        <NavMain items={navItems} />
       </SidebarContent>
       <SidebarRail />
+      <SidebarFooter />
     </Sidebar>
   );
 }

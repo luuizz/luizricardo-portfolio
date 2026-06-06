@@ -1,5 +1,16 @@
 import React from "react";
-import HeaderBlog from "@/app/(blog)/ui/header";
+import Header from "@/components/header/header";
+import Footer from "@/components/footer/footer";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    default: "Blog | Luiz Ricardo",
+    template: "%s | Blog · Luiz Ricardo",
+  },
+  description:
+    "Artigos sobre desenvolvimento web, front-end, performance e design. Escrito por Luiz Ricardo.",
+};
 
 export default function BlogLayout({
   children,
@@ -8,8 +19,9 @@ export default function BlogLayout({
 }>) {
   return (
     <>
-      <HeaderBlog />
-      {children}
+      <Header />
+      <main>{children}</main>
+      <Footer />
     </>
   );
 }

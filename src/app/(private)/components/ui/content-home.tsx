@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ContentDashboardHomeProps {
   showPlaceholders?: boolean;
@@ -37,11 +38,13 @@ export default function ContentDashboardHome({
       {showPlaceholders ? (
         <>
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
+            <Skeleton className={"aspect-video rounded-xl"} />
+            <Skeleton className={"aspect-video rounded-xl"} />
+            <Skeleton className={"aspect-video rounded-xl"} />
           </div>
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
+          <Skeleton
+            className={"min-h-[100vh] flex-1 rounded-xl md:min-h-min"}
+          />
         </>
       ) : (
         children

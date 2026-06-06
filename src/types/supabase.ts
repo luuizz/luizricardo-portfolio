@@ -39,63 +39,189 @@ export type Database = {
   }
   public: {
     Tables: {
+      budgets: {
+        Row: {
+          client_id: string | null
+          created_at: string
+          deleted_at: string | null
+          id: string
+          notes: string | null
+          status: string
+          title: string
+          total: number | null
+          updated_at: string
+        }
+        Insert: {
+          client_id?: string | null
+          created_at?: string
+          deleted_at?: string | null
+          id?: string
+          notes?: string | null
+          status?: string
+          title: string
+          total?: number | null
+          updated_at?: string
+        }
+        Update: {
+          client_id?: string | null
+          created_at?: string
+          deleted_at?: string | null
+          id?: string
+          notes?: string | null
+          status?: string
+          title?: string
+          total?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       categories: {
         Row: {
           created_at: string
+          deleted_at: string | null
           id: string
           name: string
           slug: string
           status: Database["public"]["Enums"]["category_status"]
+          updated_at: string | null
         }
         Insert: {
           created_at?: string
+          deleted_at?: string | null
           id?: string
           name: string
           slug: string
           status?: Database["public"]["Enums"]["category_status"]
+          updated_at?: string | null
         }
         Update: {
           created_at?: string
+          deleted_at?: string | null
           id?: string
           name?: string
           slug?: string
           status?: Database["public"]["Enums"]["category_status"]
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      client_sectors: {
+        Row: {
+          created_at: string
+          deleted_at: string | null
+          id: string
+          name: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          deleted_at?: string | null
+          id?: string
+          name: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          deleted_at?: string | null
+          id?: string
+          name?: string
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      clients: {
+        Row: {
+          company: string | null
+          created_at: string
+          deleted_at: string | null
+          email: string | null
+          id: string
+          name: string
+          notes: string | null
+          phone: string | null
+          sector_id: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          deleted_at?: string | null
+          email?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+          sector_id?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          deleted_at?: string | null
+          email?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          sector_id?: string | null
+          status?: string
+          updated_at?: string
         }
         Relationships: []
       }
       media: {
         Row: {
+          alt_text: string | null
           bucket: string
+          caption: string | null
+          deleted_at: string | null
           height: number | null
           id: string
           mime_type: string
           name: string
           path: string
           size: number
+          tags: string[] | null
+          title: string | null
           uploaded_at: string
           uploaded_by: string | null
           width: number | null
         }
         Insert: {
+          alt_text?: string | null
           bucket?: string
+          caption?: string | null
+          deleted_at?: string | null
           height?: number | null
           id?: string
           mime_type: string
           name: string
           path: string
           size: number
+          tags?: string[] | null
+          title?: string | null
           uploaded_at?: string
           uploaded_by?: string | null
           width?: number | null
         }
         Update: {
+          alt_text?: string | null
           bucket?: string
+          caption?: string | null
+          deleted_at?: string | null
           height?: number | null
           id?: string
           mime_type?: string
           name?: string
           path?: string
           size?: number
+          tags?: string[] | null
+          title?: string | null
           uploaded_at?: string
           uploaded_by?: string | null
           width?: number | null
@@ -108,18 +234,21 @@ export type Database = {
           created_at: string
           id: string
           post_id: string
+          updated_at: string | null
         }
         Insert: {
           category_id: string
           created_at?: string
           id?: string
           post_id: string
+          updated_at?: string | null
         }
         Update: {
           category_id?: string
           created_at?: string
           id?: string
           post_id?: string
+          updated_at?: string | null
         }
         Relationships: [
           {
@@ -145,11 +274,13 @@ export type Database = {
           content: Json | null
           cover_image: string | null
           created_at: string
+          deleted_at: string | null
           excerpt: string
           id: string
           seo_id: string | null
           slug: string | null
           status: Database["public"]["Enums"]["post_status"]
+          tags: string[] | null
           title: string
           updated_at: string
         }
@@ -159,11 +290,13 @@ export type Database = {
           content?: Json | null
           cover_image?: string | null
           created_at?: string
+          deleted_at?: string | null
           excerpt: string
           id?: string
           seo_id?: string | null
           slug?: string | null
           status?: Database["public"]["Enums"]["post_status"]
+          tags?: string[] | null
           title: string
           updated_at?: string
         }
@@ -173,11 +306,13 @@ export type Database = {
           content?: Json | null
           cover_image?: string | null
           created_at?: string
+          deleted_at?: string | null
           excerpt?: string
           id?: string
           seo_id?: string | null
           slug?: string | null
           status?: Database["public"]["Enums"]["post_status"]
+          tags?: string[] | null
           title?: string
           updated_at?: string
         }
@@ -233,18 +368,21 @@ export type Database = {
           id: string
           project_id: string
           project_type_id: string
+          updated_at: string | null
         }
         Insert: {
           created_at?: string
           id?: string
           project_id: string
           project_type_id: string
+          updated_at?: string | null
         }
         Update: {
           created_at?: string
           id?: string
           project_id?: string
           project_type_id?: string
+          updated_at?: string | null
         }
         Relationships: [
           {
@@ -266,23 +404,29 @@ export type Database = {
       project_types: {
         Row: {
           created_at: string
+          deleted_at: string | null
           id: string
           name: string
           slug: string
+          status: Database["public"]["Enums"]["project_type_status"]
           updated_at: string
         }
         Insert: {
           created_at?: string
+          deleted_at?: string | null
           id?: string
           name: string
           slug: string
+          status?: Database["public"]["Enums"]["project_type_status"]
           updated_at?: string
         }
         Update: {
           created_at?: string
+          deleted_at?: string | null
           id?: string
           name?: string
           slug?: string
+          status?: Database["public"]["Enums"]["project_type_status"]
           updated_at?: string
         }
         Relationships: []
@@ -292,15 +436,18 @@ export type Database = {
           banner_image: string | null
           content: Json | null
           created_at: string
+          deleted_at: string | null
           end_date: string | null
           highlight_color: string | null
           id: string
+          project_types: string | null
           "project-highlights": string | null
           seo_id: string | null
           slug: string | null
           start_date: string | null
           status: Database["public"]["Enums"]["project_status"]
           summary: string | null
+          tags: string[] | null
           title: string
           updated_at: string
         }
@@ -308,15 +455,18 @@ export type Database = {
           banner_image?: string | null
           content?: Json | null
           created_at?: string
+          deleted_at?: string | null
           end_date?: string | null
           highlight_color?: string | null
           id?: string
+          project_types?: string | null
           "project-highlights"?: string | null
           seo_id?: string | null
           slug?: string | null
           start_date?: string | null
           status?: Database["public"]["Enums"]["project_status"]
           summary?: string | null
+          tags?: string[] | null
           title: string
           updated_at?: string
         }
@@ -324,19 +474,29 @@ export type Database = {
           banner_image?: string | null
           content?: Json | null
           created_at?: string
+          deleted_at?: string | null
           end_date?: string | null
           highlight_color?: string | null
           id?: string
+          project_types?: string | null
           "project-highlights"?: string | null
           seo_id?: string | null
           slug?: string | null
           start_date?: string | null
           status?: Database["public"]["Enums"]["project_status"]
           summary?: string | null
+          tags?: string[] | null
           title?: string
           updated_at?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "projects_project_types_fkey"
+            columns: ["project_types"]
+            isOneToOne: false
+            referencedRelation: "project_types"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "projects_project-highlights_fkey"
             columns: ["project-highlights"]
@@ -357,7 +517,9 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          og_description: string | null
           og_image: string | null
+          og_title: string | null
           seo_description: string | null
           seo_keywords: string | null
           seo_title: string
@@ -366,7 +528,9 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          og_description?: string | null
           og_image?: string | null
+          og_title?: string | null
           seo_description?: string | null
           seo_keywords?: string | null
           seo_title: string
@@ -375,11 +539,61 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          og_description?: string | null
           og_image?: string | null
+          og_title?: string | null
           seo_description?: string | null
           seo_keywords?: string | null
           seo_title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      videos: {
+        Row: {
+          id: string
+          title: string
+          description: string | null
+          url: string
+          thumbnail: string | null
+          platform: string
+          category: string
+          status: string
+          duration: string | null
+          slug: string | null
+          created_at: string
+          updated_at: string
+          deleted_at: string | null
+        }
+        Insert: {
+          id?: string
+          title: string
+          description?: string | null
+          url: string
+          thumbnail?: string | null
+          platform?: string
+          category?: string
+          status?: string
+          duration?: string | null
+          slug?: string | null
+          created_at?: string
+          updated_at?: string
+          deleted_at?: string | null
+        }
+        Update: {
+          id?: string
+          title?: string
+          description?: string | null
+          url?: string
+          thumbnail?: string | null
+          platform?: string
+          category?: string
+          status?: string
+          duration?: string | null
+          slug?: string | null
+          created_at?: string
+          updated_at?: string
+          deleted_at?: string | null
         }
         Relationships: []
       }
@@ -394,6 +608,7 @@ export type Database = {
       category_status: "draft" | "scheduled" | "published"
       post_status: "draft" | "scheduled" | "published"
       project_status: "draft" | "published" | "archived"
+      project_type_status: "draft" | "published" | "archived"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -527,6 +742,7 @@ export const Constants = {
       category_status: ["draft", "scheduled", "published"],
       post_status: ["draft", "scheduled", "published"],
       project_status: ["draft", "published", "archived"],
+      project_type_status: ["draft", "published", "archived"],
     },
   },
 } as const
