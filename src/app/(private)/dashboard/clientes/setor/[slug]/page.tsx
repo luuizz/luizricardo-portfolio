@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import ContentDashboard from "@/app/(private)/components/ui/content-home";
 import { getSectorBySlug } from "@/lib/services/clients.service";
 import { notFound } from "next/navigation";
@@ -11,7 +12,7 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   return { title: `Dashboard | Setor: ${slug}` };
 }

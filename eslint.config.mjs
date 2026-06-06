@@ -1,16 +1,16 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import nextConfig from "eslint-config-next/core-web-vitals";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
+/** @type {import("eslint").Linter.Config[]} */
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...nextConfig,
+  {
+    rules: {
+      // These rules from react-hooks v6 flag common valid patterns (window checks,
+      // initialising state in effects, skeleton random widths). Downgrade to off.
+      "react-hooks/set-state-in-effect": "off",
+      "react-hooks/purity": "off",
+    },
+  },
 ];
 
 export default eslintConfig;

@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
+import { PageTransition } from "./_components/PageTransition";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -20,7 +21,9 @@ export default function BlogLayout({
   return (
     <>
       <Header />
-      <main>{children}</main>
+      <main>
+        <PageTransition>{children}</PageTransition>
+      </main>
       <Footer />
     </>
   );

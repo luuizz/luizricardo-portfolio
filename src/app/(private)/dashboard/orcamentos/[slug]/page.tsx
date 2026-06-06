@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import ContentDashboard from "@/app/(private)/components/ui/content-home";
 import { getBudgetById } from "@/lib/services/budgets.service";
 import { getDashboardClients } from "@/lib/services/clients.service";
@@ -12,7 +13,7 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   return { title: `Dashboard | Orçamento: ${slug}` };
 }

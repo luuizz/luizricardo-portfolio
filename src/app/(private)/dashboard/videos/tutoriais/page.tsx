@@ -40,7 +40,7 @@ export default async function TutoriaisPage() {
               <div>
                 <p className="font-medium">Nenhum tutorial ainda</p>
                 <p className="text-sm text-muted-foreground">
-                  Crie um novo vídeo e defina a categoria como "Tutorial".
+                  Crie um novo vídeo e defina a categoria como &quot;Tutorial&quot;.
                 </p>
               </div>
               <Button asChild size="sm" variant="outline">

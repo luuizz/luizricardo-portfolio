@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import ContentDashboard from "@/app/(private)/components/ui/content-home";
 import BudgetForm from "@/app/(private)/components/form/budget/BudgetForm";
 import { getBudgetById } from "@/lib/services/budgets.service";
@@ -9,7 +10,7 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   return { title: `Dashboard | Editar Orçamento: ${slug}` };
 }

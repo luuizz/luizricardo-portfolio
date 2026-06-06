@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://luizricardotech.com"),
+};
 
 const inter = Inter({
   variable: "--font-inter",

@@ -9,6 +9,36 @@ interface TableOfContentsProps {
   headings: Heading[];
 }
 
+interface TocListProps {
+  headings: Heading[];
+  activeId: string;
+  onLinkClick: () => void;
+}
+
+function TocList({ headings, activeId, onLinkClick }: TocListProps) {
+  return (
+    <ul className="space-y-1.5">
+      {headings.map((h) => (
+        <li key={h.id}>
+          <a
+            href={`#${h.id}`}
+            onClick={onLinkClick}
+            className={cn(
+              "block text-[13px] leading-snug transition-colors duration-150",
+              h.level === 2 ? "pl-0" : h.level === 3 ? "pl-3" : "pl-5",
+              activeId === h.id
+                ? "font-semibold text-brand-primary-default"
+                : "text-brand-gray-600 hover:text-brand-gray-200",
+            )}
+          >
+            {h.text}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export function TableOfContents({ headings }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>(headings[0]?.id ?? "");
   const [open, setOpen] = useState(false);
@@ -35,28 +65,6 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
 
   if (headings.length === 0) return null;
 
-  const Inner = () => (
-    <ul className="space-y-1.5">
-      {headings.map((h) => (
-        <li key={h.id}>
-          <a
-            href={`#${h.id}`}
-            onClick={() => setOpen(false)}
-            className={cn(
-              "block text-[13px] leading-snug transition-colors duration-150",
-              h.level === 2 ? "pl-0" : h.level === 3 ? "pl-3" : "pl-5",
-              activeId === h.id
-                ? "font-semibold text-brand-primary-default"
-                : "text-brand-gray-600 hover:text-brand-gray-200",
-            )}
-          >
-            {h.text}
-          </a>
-        </li>
-      ))}
-    </ul>
-  );
-
   return (
     <>
       {/* Desktop: sticky sidebar */}
@@ -66,7 +74,7 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
             <List className="h-3.5 w-3.5" />
             Neste artigo
           </p>
-          <Inner />
+          <TocList headings={headings} activeId={activeId} onLinkClick={() => setOpen(false)} />
         </div>
       </aside>
 
@@ -85,7 +93,7 @@ export function TableOfContents({ headings }: TableOfContentsProps) {
         </button>
         {open && (
           <div className="rounded-b-xl border border-t-0 border-brand-gray-800 bg-brand-gray-900/95 px-4 pb-4 pt-3 backdrop-blur-md">
-            <Inner />
+            <TocList headings={headings} activeId={activeId} onLinkClick={() => setOpen(false)} />
           </div>
         )}
       </div>

@@ -4,7 +4,7 @@ import { createServerClient } from "@supabase/ssr";
 const PRIVATE_PREFIX = "/dashboard";
 const REDIRECT_WHEN_NOT_AUTHENTICATED = "/auth/login";
 
-export default async function middleware(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   const response = NextResponse.next({
     request: {
       headers: request.headers,
@@ -37,7 +37,6 @@ export default async function middleware(request: NextRequest) {
     const redirectUrl = request.nextUrl.clone();
     redirectUrl.pathname = REDIRECT_WHEN_NOT_AUTHENTICATED;
 
-    // limpa tokens se quiser, mas não é obrigatório
     response.cookies.delete("sb-access-token");
     response.cookies.delete("sb-refresh-token");
     response.cookies.delete("sb-auth-token");

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { menuLinks, socialLinks } from "@/app/shared/utils/global-data";
 import AsideMenu from "./AsideMenu";
 import Logo from "@/app/assets/Logo";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ export default function Header() {
           </Link>
           <nav className="hidden items-center justify-between gap-4 lg:flex">
             <ul className="flex items-center gap-6">
-              {menuLinks.map((item, index) => (
+              {menuLinks.filter((item) => !item.url.startsWith("/")).map((item, index) => (
                 <li key={index}>
                   <Link
                     className={`text-base/short font-normal transition-colors duration-300 ${scrolled ? "text-brand-gray-300 hover:text-brand-primary-default" : "text-white hover:text-brand-primary-default"}`}
@@ -38,6 +39,22 @@ export default function Header() {
                     title={item.title}
                   >
                     {item.title}
+                  </Link>
+                </li>
+              ))}
+              {menuLinks.filter((item) => item.url.startsWith("/")).map((item, index) => (
+                <li key={`page-${index}`}>
+                  <Link
+                    href={item.url}
+                    title={item.title}
+                    className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 text-sm font-medium transition-all duration-300 ${
+                      scrolled
+                        ? "border-brand-gray-700 text-brand-gray-300 hover:border-brand-primary-default hover:text-brand-primary-default"
+                        : "border-brand-gray-700 text-brand-gray-200 hover:border-brand-primary-default hover:text-brand-primary-default"
+                    }`}
+                  >
+                    {item.title}
+                    <ArrowUpRight className="h-3.5 w-3.5" />
                   </Link>
                 </li>
               ))}
