@@ -35,7 +35,7 @@ export function TablePagination({
   setItemsPerPage,
 }: TablePaginationProps) {
   return (
-    <div className="mt-4 flex items-center justify-between border-t pt-6">
+    <div className="mt-4 flex flex-col gap-4 border-t pt-6 sm:flex-row sm:items-center sm:justify-between">
       {/* Total de itens */}
       <p className="text-sm text-muted-foreground">
         Total: <strong>{totalItems}</strong> itens

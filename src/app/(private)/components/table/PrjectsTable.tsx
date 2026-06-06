@@ -60,11 +60,11 @@ export default function ProjectTable({ data }: ProjectTableProps) {
         data={data}
         renderHeader={() => (
           <TableRow>
-            <TableHead className="w-[220px]">Título</TableHead>
-            <TableHead>Slug</TableHead>
+            <TableHead className="min-w-[160px]">Título</TableHead>
+            <TableHead className="hidden sm:table-cell">Slug</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Tipos</TableHead>
-            <TableHead>Criado em</TableHead>
+            <TableHead className="hidden md:table-cell">Tipos</TableHead>
+            <TableHead className="hidden lg:table-cell">Criado em</TableHead>
             <TableHead className="text-right">Ações</TableHead>
           </TableRow>
         )}
@@ -77,19 +77,19 @@ export default function ProjectTable({ data }: ProjectTableProps) {
 
           return (
             <TableRow key={project.id}>
-              <TableCell className="max-w-[200px] truncate font-medium" title={project.title}>
+              <TableCell className="min-w-[160px] max-w-[220px] truncate font-medium" title={project.title}>
                 {project.title}
               </TableCell>
-              <TableCell className="max-w-[150px] truncate text-muted-foreground">
+              <TableCell className="hidden max-w-[150px] truncate text-muted-foreground sm:table-cell">
                 {project.slug ?? "-"}
               </TableCell>
               <TableCell>
                 <Badge variant={status.variant}>{status.label}</Badge>
               </TableCell>
-              <TableCell className="text-sm text-muted-foreground">
+              <TableCell className="hidden text-sm text-muted-foreground md:table-cell">
                 {types || "-"}
               </TableCell>
-              <TableCell>{formatDate(project.created_at)}</TableCell>
+              <TableCell className="hidden lg:table-cell">{formatDate(project.created_at)}</TableCell>
               <TableCell className="text-right">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>

@@ -112,7 +112,7 @@ function FeaturedCard({ post }: { post: PostWithCategory }) {
       </div>
 
       {/* Content */}
-      <div className="flex flex-col justify-center p-8 md:p-10 lg:p-14">
+      <div className="flex flex-col justify-center p-5 sm:p-8 md:p-10 lg:p-14">
         <div className="mb-4 flex items-center gap-3 text-xs text-brand-gray-600">
           <span className="flex items-center gap-1">
             <Calendar className="h-3.5 w-3.5" />
@@ -207,7 +207,7 @@ export default async function BlogPage({
           <p className="mb-3 font-mono text-xs font-medium tracking-[0.2em] text-brand-primary-default uppercase">
             — Blog
           </p>
-          <h1 className="relative inline-block font-poppins text-5xl font-semibold leading-[1.1] text-white md:text-6xl-short">
+          <h1 className="relative inline-block font-poppins text-4xl font-semibold leading-[1.1] text-white sm:text-5xl md:text-6xl-short">
             Artigos &amp;
             <br />
             <span className="relative">

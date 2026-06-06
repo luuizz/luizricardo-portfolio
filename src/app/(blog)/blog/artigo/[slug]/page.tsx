@@ -192,7 +192,7 @@ export default async function ArtigoPage({
       {/* ─── Hero image ─────────────────────────────────────────────── */}
       <div className="border-b border-brand-gray-900">
         {heroImage ? (
-          <div className="aspect-[21/9] w-full overflow-hidden">
+          <div className="aspect-[4/3] w-full overflow-hidden sm:aspect-[16/9] md:aspect-[21/9]">
             <img
               src={heroImage}
               alt={post.title}
@@ -201,7 +201,7 @@ export default async function ArtigoPage({
           </div>
         ) : (
           <div
-            className="relative flex aspect-[21/9] items-center justify-center overflow-hidden"
+            className="relative flex aspect-[4/3] items-center justify-center overflow-hidden sm:aspect-[16/9] md:aspect-[21/9]"
             style={gradient}
           >
             <span
@@ -288,7 +288,7 @@ export default async function ArtigoPage({
               )}
 
               {/* Author card */}
-              <div className="mt-14 flex items-center gap-5 rounded-2xl border border-brand-gray-800 bg-brand-gray-900/60 p-6">
+              <div className="mt-14 flex items-start gap-4 rounded-2xl border border-brand-gray-800 bg-brand-gray-900/60 p-5 sm:items-center sm:gap-5 sm:p-6">
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-primary-default text-xl font-bold text-black">
                   L
                 </div>

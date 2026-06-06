@@ -49,10 +49,10 @@ export default function DataTableShell<
   } = usePagination(sortedData);
 
   return (
-    <div className="mt-10 w-full space-y-6">
+    <div className="mt-6 w-full space-y-4 sm:mt-10 sm:space-y-6">
       <TableHeaderActions title={title} newButtonLink={newButtonLink} />
 
-      <div className="flex items-center justify-start gap-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
         <TableSearch
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -65,7 +65,7 @@ export default function DataTableShell<
         />
       </div>
 
-      <div className="rounded-md border">
+      <div className="overflow-x-auto rounded-md border">
         <Table>
           <TableHeader>{renderHeader()}</TableHeader>
           <TableBody>

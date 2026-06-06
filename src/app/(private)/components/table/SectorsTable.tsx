@@ -53,17 +53,17 @@ export default function SectorsTable({ data }: SectorsTableProps) {
         data={data}
         renderHeader={() => (
           <TableRow>
-            <TableHead className="w-[200px]">Nome</TableHead>
-            <TableHead>Slug</TableHead>
-            <TableHead>Criado em</TableHead>
+            <TableHead className="min-w-[140px]">Nome</TableHead>
+            <TableHead className="hidden sm:table-cell">Slug</TableHead>
+            <TableHead className="hidden md:table-cell">Criado em</TableHead>
             <TableHead className="text-right">Ações</TableHead>
           </TableRow>
         )}
         renderRow={(sector) => (
           <TableRow key={sector.id}>
-            <TableCell className="font-medium">{sector.name}</TableCell>
-            <TableCell className="text-muted-foreground">{sector.slug}</TableCell>
-            <TableCell>{formatDate(sector.created_at)}</TableCell>
+            <TableCell className="min-w-[140px] font-medium">{sector.name}</TableCell>
+            <TableCell className="hidden text-muted-foreground sm:table-cell">{sector.slug}</TableCell>
+            <TableCell className="hidden md:table-cell">{formatDate(sector.created_at)}</TableCell>
             <TableCell className="text-right">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

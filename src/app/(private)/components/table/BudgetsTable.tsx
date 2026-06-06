@@ -69,11 +69,11 @@ export default function BudgetsTable({ data, clients = [] }: BudgetsTableProps) 
         data={data}
         renderHeader={() => (
           <TableRow>
-            <TableHead className="w-[220px]">Título</TableHead>
-            <TableHead>Cliente</TableHead>
-            <TableHead>Total</TableHead>
+            <TableHead className="min-w-[160px]">Título</TableHead>
+            <TableHead className="hidden sm:table-cell">Cliente</TableHead>
+            <TableHead className="hidden md:table-cell">Total</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Criado em</TableHead>
+            <TableHead className="hidden lg:table-cell">Criado em</TableHead>
             <TableHead className="text-right">Ações</TableHead>
           </TableRow>
         )}
@@ -81,17 +81,17 @@ export default function BudgetsTable({ data, clients = [] }: BudgetsTableProps) 
           const s = STATUS_MAP[budget.status] ?? { label: budget.status, variant: "outline" as const };
           return (
             <TableRow key={budget.id}>
-              <TableCell className="max-w-[200px] truncate font-medium" title={budget.title}>
+              <TableCell className="min-w-[160px] max-w-[220px] truncate font-medium" title={budget.title}>
                 {budget.title}
               </TableCell>
-              <TableCell className="text-muted-foreground">
+              <TableCell className="hidden text-muted-foreground sm:table-cell">
                 {budget.client_id ? clientMap[budget.client_id] ?? "-" : "-"}
               </TableCell>
-              <TableCell className="font-medium">{formatCurrency(budget.total)}</TableCell>
+              <TableCell className="hidden font-medium md:table-cell">{formatCurrency(budget.total)}</TableCell>
               <TableCell>
                 <Badge variant={s.variant}>{s.label}</Badge>
               </TableCell>
-              <TableCell>{formatDate(budget.created_at)}</TableCell>
+              <TableCell className="hidden lg:table-cell">{formatDate(budget.created_at)}</TableCell>
               <TableCell className="text-right">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>

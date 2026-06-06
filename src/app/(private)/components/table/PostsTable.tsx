@@ -60,11 +60,11 @@ export function PostsTable({ data }: PostsTableProps) {
         data={data}
         renderHeader={() => (
           <TableRow>
-            <TableHead className="w-[280px]">Título</TableHead>
-            <TableHead>Slug</TableHead>
+            <TableHead className="min-w-[160px]">Título</TableHead>
+            <TableHead className="hidden sm:table-cell">Slug</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Categoria</TableHead>
-            <TableHead>Criado em</TableHead>
+            <TableHead className="hidden md:table-cell">Categoria</TableHead>
+            <TableHead className="hidden lg:table-cell">Criado em</TableHead>
             <TableHead className="text-right">Ações</TableHead>
           </TableRow>
         )}
@@ -72,21 +72,21 @@ export function PostsTable({ data }: PostsTableProps) {
           const status = STATUS_MAP[post.status] ?? { label: post.status, variant: "outline" as const };
           return (
             <TableRow key={post.id}>
-              <TableCell className="max-w-[200px] truncate font-medium" title={post.title}>
+              <TableCell className="min-w-[160px] max-w-[220px] truncate font-medium" title={post.title}>
                 {post.title}
               </TableCell>
-              <TableCell className="max-w-[150px] truncate">{post.slug}</TableCell>
+              <TableCell className="hidden max-w-[150px] truncate sm:table-cell">{post.slug}</TableCell>
               <TableCell>
                 <Badge variant={status.variant}>{status.label}</Badge>
               </TableCell>
-              <TableCell>
+              <TableCell className="hidden md:table-cell">
                 {post.categories ? (
                   <Badge variant="outline">{post.categories.name}</Badge>
                 ) : (
                   "-"
                 )}
               </TableCell>
-              <TableCell>{formatDate(post.created_at)}</TableCell>
+              <TableCell className="hidden lg:table-cell">{formatDate(post.created_at)}</TableCell>
               <TableCell className="text-right">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>

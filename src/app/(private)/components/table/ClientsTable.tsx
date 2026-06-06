@@ -60,25 +60,25 @@ export default function ClientsTable({
         data={data}
         renderHeader={() => (
           <TableRow>
-            <TableHead className="w-[200px]">Nome</TableHead>
-            <TableHead>Empresa</TableHead>
-            <TableHead>Setor</TableHead>
-            <TableHead>Email</TableHead>
+            <TableHead className="min-w-[140px]">Nome</TableHead>
+            <TableHead className="hidden sm:table-cell">Empresa</TableHead>
+            <TableHead className="hidden md:table-cell">Setor</TableHead>
+            <TableHead className="hidden lg:table-cell">Email</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Criado em</TableHead>
+            <TableHead className="hidden lg:table-cell">Criado em</TableHead>
             <TableHead className="text-right">Ações</TableHead>
           </TableRow>
         )}
         renderRow={(client) => (
           <TableRow key={client.id}>
-            <TableCell className="font-medium">{client.name}</TableCell>
-            <TableCell className="text-muted-foreground">
+            <TableCell className="min-w-[140px] font-medium">{client.name}</TableCell>
+            <TableCell className="hidden text-muted-foreground sm:table-cell">
               {client.company ?? "-"}
             </TableCell>
-            <TableCell className="text-muted-foreground">
+            <TableCell className="hidden text-muted-foreground md:table-cell">
               {client.sector_id ? (sectorMap[client.sector_id] ?? "-") : "-"}
             </TableCell>
-            <TableCell className="text-muted-foreground">
+            <TableCell className="hidden text-muted-foreground lg:table-cell">
               {client.email ?? "-"}
             </TableCell>
             <TableCell>
@@ -88,7 +88,7 @@ export default function ClientsTable({
                 {client.status === "active" ? "Ativo" : "Inativo"}
               </Badge>
             </TableCell>
-            <TableCell>{formatDate(client.created_at)}</TableCell>
+            <TableCell className="hidden lg:table-cell">{formatDate(client.created_at)}</TableCell>
             <TableCell className="text-right">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

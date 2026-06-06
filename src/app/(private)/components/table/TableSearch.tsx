@@ -19,7 +19,7 @@ export function TableSearch({
   setPage,
 }: TableSearchProps) {
   return (
-    <InputGroup className="w-[250px]">
+    <InputGroup className="w-full sm:w-[250px]">
       <InputGroupInput
         placeholder="Buscar por título ou slug..."
         value={searchQuery}

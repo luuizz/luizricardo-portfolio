@@ -65,10 +65,10 @@ export default function CategoryPostTable({ data }: CategoryPostTableProps) {
         data={data}
         renderHeader={() => (
           <TableRow>
-            <TableHead className="w-[200px]">Nome</TableHead>
-            <TableHead>Slug</TableHead>
+            <TableHead className="min-w-[140px]">Nome</TableHead>
+            <TableHead className="hidden sm:table-cell">Slug</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Criado em</TableHead>
+            <TableHead className="hidden md:table-cell">Criado em</TableHead>
             <TableHead className="text-right">Ações</TableHead>
           </TableRow>
         )}
@@ -76,12 +76,12 @@ export default function CategoryPostTable({ data }: CategoryPostTableProps) {
           const status = STATUS_MAP[category.status] ?? { label: category.status, variant: "outline" as const };
           return (
             <TableRow key={category.id}>
-              <TableCell className="font-medium">{category.name}</TableCell>
-              <TableCell className="text-muted-foreground">{category.slug}</TableCell>
+              <TableCell className="min-w-[140px] font-medium">{category.name}</TableCell>
+              <TableCell className="hidden text-muted-foreground sm:table-cell">{category.slug}</TableCell>
               <TableCell>
                 <Badge variant={status.variant}>{status.label}</Badge>
               </TableCell>
-              <TableCell>{formatDate(category.created_at)}</TableCell>
+              <TableCell className="hidden md:table-cell">{formatDate(category.created_at)}</TableCell>
               <TableCell className="text-right">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
