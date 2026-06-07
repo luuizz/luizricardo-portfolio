@@ -42,22 +42,6 @@ export default function Header() {
                   </Link>
                 </li>
               ))}
-              {menuLinks.filter((item) => item.url.startsWith("/")).map((item, index) => (
-                <li key={`page-${index}`}>
-                  <Link
-                    href={item.url}
-                    title={item.title}
-                    className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 text-sm font-medium transition-all duration-300 ${
-                      scrolled
-                        ? "border-brand-gray-700 text-brand-gray-300 hover:border-brand-primary-default hover:text-brand-primary-default"
-                        : "border-brand-gray-700 text-brand-gray-200 hover:border-brand-primary-default hover:text-brand-primary-default"
-                    }`}
-                  >
-                    {item.title}
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  </Link>
-                </li>
-              ))}
             </ul>
             <div
               className={`h-6 w-0.5 transition-all duration-300 ease-linear ${scrolled ? "bg-brand-gray-300" : "bg-brand-gray-300"}`}
@@ -79,6 +63,21 @@ export default function Header() {
                 </li>
               ))}
             </ul>
+            {menuLinks.filter((item) => item.url.startsWith("/")).map((item, index) => (
+              <Link
+                key={`page-${index}`}
+                href={item.url}
+                title={item.title}
+                className={`inline-flex items-center gap-1 rounded-full border px-3 py-1 text-sm font-medium transition-all duration-300 ${
+                  scrolled
+                    ? "border-brand-gray-700 text-brand-gray-300 hover:border-brand-primary-default hover:text-brand-primary-default"
+                    : "border-brand-gray-700 text-brand-gray-200 hover:border-brand-primary-default hover:text-brand-primary-default"
+                }`}
+              >
+                {item.title}
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </Link>
+            ))}
           </nav>
           <button
             onClick={() => setIsOpen(!isOpen)}

@@ -34,7 +34,7 @@ export default function ContentDashboardHome({
   }, [pathname]);
 
   return (
-    <div ref={containerRef} className="flex flex-1 flex-col gap-4 p-4 pt-0">
+    <div ref={containerRef} className="flex flex-1 flex-col gap-4 overflow-x-hidden p-4 pt-0">
       {showPlaceholders ? (
         <>
           <div className="grid auto-rows-min gap-4 md:grid-cols-3">

@@ -1,6 +1,6 @@
 "use server";
 
-import { withAction } from "@/lib/actions/with-action";
+import { withAuthAction as withAction } from "@/lib/actions/with-action";
 import {
   createCategoryService,
   updateCategoryService,

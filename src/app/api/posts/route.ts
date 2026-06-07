@@ -1,115 +1,113 @@
 import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { requireAuth } from "@/lib/api/require-auth";
 
-// ===================================================
-// GET - Lista todos os posts
-// ===================================================
 export async function GET() {
-  const supabase = await createSupabaseServerClient(); // ✅ await
+  const { error } = await requireAuth();
+  if (error) return error;
 
-  const { data, error } = await supabase
+  const supabase = await createSupabaseServerClient();
+  const { data, error: dbError } = await supabase
     .from("posts")
     .select("*")
     .order("created_at", { ascending: false });
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  if (dbError) {
+    return NextResponse.json({ error: "Erro ao buscar posts." }, { status: 500 });
   }
 
   return NextResponse.json(data, { status: 200 });
 }
 
-// ===================================================
-// POST - Cria um novo post
-// ===================================================
 export async function POST(request: Request) {
+  const { user, error } = await requireAuth();
+  if (error) return error;
+
   const supabase = await createSupabaseServerClient();
   const body = await request.json();
 
-  // ✅ Pegamos o ID do usuário autenticado
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return NextResponse.json(
-      { message: "Usuário não autenticado." },
-      { status: 401 },
-    );
-  }
-
+  const { title, slug, excerpt, status, content, tags, category } = body;
   const payload = {
-    ...body,
-    status: body.status ?? "draft",
+    title,
+    slug,
+    excerpt,
+    status: status ?? "draft",
+    content,
+    tags,
+    category,
     user_id: user.id,
   };
 
-  const { data, error } = await supabase
+  const { data, error: dbError } = await supabase
     .from("posts")
     .insert([payload])
     .select()
     .single();
 
-  if (error) {
-    return NextResponse.json({ message: error.message }, { status: 400 });
+  if (dbError) {
+    return NextResponse.json({ error: "Erro ao criar post." }, { status: 400 });
   }
 
   return NextResponse.json(data, { status: 201 });
 }
 
-// ===================================================
-// PUT - Atualiza um post
-// ===================================================
 export async function PUT(request: Request) {
+  const { error } = await requireAuth();
+  if (error) return error;
+
   const supabase = await createSupabaseServerClient();
   const body = await request.json();
-
-  const { id, slug, ...updates } = body;
+  const { id, slug, title, excerpt, status, content, tags, category } = body;
 
   if (!id && !slug) {
-    return NextResponse.json(
-      { message: "Missing post ID or slug" },
-      { status: 400 },
-    );
+    return NextResponse.json({ error: "ID ou slug obrigatório." }, { status: 400 });
   }
 
-  let query = supabase.from("posts").update({
-    ...updates,
-    updated_at: new Date().toISOString(), // ✅ força atualização
-  });
+  const updates = {
+    ...(title !== undefined && { title }),
+    ...(excerpt !== undefined && { excerpt }),
+    ...(status !== undefined && { status }),
+    ...(content !== undefined && { content }),
+    ...(tags !== undefined && { tags }),
+    ...(category !== undefined && { category }),
+    updated_at: new Date().toISOString(),
+  };
 
-  // ✅ aplica WHERE conforme o identificador disponível
+  let query = supabase.from("posts").update(updates);
   if (id) {
     query = query.eq("id", id);
-  } else if (slug) {
+  } else {
     query = query.eq("slug", slug);
   }
 
-  const { data, error } = await query.select().single();
+  const { data, error: dbError } = await query.select().single();
 
-  if (error) {
-    return NextResponse.json({ message: error.message }, { status: 400 });
+  if (dbError) {
+    return NextResponse.json({ error: "Erro ao atualizar post." }, { status: 400 });
   }
 
   return NextResponse.json(data, { status: 200 });
 }
 
-// ===================================================
-// DELETE - Exclui um post
-// ===================================================
 export async function DELETE(request: Request) {
-  const supabase = await createSupabaseServerClient(); // ✅ await
+  const { error } = await requireAuth();
+  if (error) return error;
+
+  const supabase = await createSupabaseServerClient();
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
 
   if (!id) {
-    return NextResponse.json({ error: "Missing post ID" }, { status: 400 });
+    return NextResponse.json({ error: "ID obrigatório." }, { status: 400 });
   }
 
-  const { error } = await supabase.from("posts").delete().eq("id", id);
+  const { error: dbError } = await supabase
+    .from("posts")
+    .update({ deleted_at: new Date().toISOString() })
+    .eq("id", id);
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+  if (dbError) {
+    return NextResponse.json({ error: "Erro ao excluir post." }, { status: 400 });
   }
 
   return NextResponse.json({ success: true }, { status: 200 });

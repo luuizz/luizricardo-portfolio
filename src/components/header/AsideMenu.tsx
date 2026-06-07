@@ -16,31 +16,30 @@ export default function AsideMenu({ isOpen, onClose }: { isOpen: boolean, onClos
             </Link>
           </li>
         ))}
-        {menuLinks.filter((item) => item.url.startsWith('/')).map((item, index) => (
-          <li key={`page-${index}`}>
-            <Link
-              onClick={onClose}
-              href={item.url}
-              title={item.title}
-              className='inline-flex items-center gap-1.5 rounded-full border border-brand-gray-700 px-4 py-1.5 text-base/short font-medium text-brand-gray-200 transition-all duration-300 hover:border-brand-primary-default hover:text-brand-primary-default'
-            >
+      </ul>
+      <ul className='flex flex-col sm:flex-row items-center gap-3'>
+        {socialLinks.map((item, index) => (
+          <li key={index}>
+            <Link target='_blank' className='group underline text-lg/short' href={item.url} title={item.title}>
               {item.title}
-              <ArrowUpRight className='h-4 w-4' />
             </Link>
           </li>
         ))}
       </ul>
-      <ul className='flex flex-col sm:flex-row items-center gap-3'>
-        {
-          socialLinks.map((item, index) => (
-            <li key={index}>
-              <Link target='_blank' className='group underline text-lg/short' href={item.url} title={item.title}>
-                {item.title}
-              </Link>
-            </li>
-          ))
-        }
-      </ul>
+      <div className='flex flex-col items-center gap-3'>
+        {menuLinks.filter((item) => item.url.startsWith('/')).map((item, index) => (
+          <Link
+            key={`page-${index}`}
+            onClick={onClose}
+            href={item.url}
+            title={item.title}
+            className='inline-flex items-center gap-1.5 rounded-full border border-brand-gray-700 px-4 py-1.5 text-base/short font-medium text-brand-gray-200 transition-all duration-300 hover:border-brand-primary-default hover:text-brand-primary-default'
+          >
+            {item.title}
+            <ArrowUpRight className='h-4 w-4' />
+          </Link>
+        ))}
+      </div>
       </Grid>
     </div>
   )

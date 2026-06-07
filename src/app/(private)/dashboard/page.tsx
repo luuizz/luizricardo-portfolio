@@ -113,7 +113,7 @@ export default async function DashboardPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl font-bold">{card.value}</p>
-                  <div className="mt-3 flex items-center gap-2">
+                  <div className="mt-3 flex flex-wrap items-center gap-1.5">
                     <Button asChild size="sm" variant="ghost" className="h-7 px-2 text-xs">
                       <Link href={card.href}>
                         Ver todos <ArrowRight className="ml-1 h-3 w-3" />
@@ -187,7 +187,7 @@ export default async function DashboardPage() {
                     <Link
                       key={post.id}
                       href={`${ROUTES.blog.root}/${post.slug}/editar`}
-                      className="flex items-start justify-between gap-3 rounded-lg border p-3 transition-colors hover:bg-muted/50"
+                      className="flex min-w-0 items-start justify-between gap-3 overflow-hidden rounded-lg border p-3 transition-colors hover:bg-muted/50"
                     >
                       <div className="min-w-0">
                         <p className="truncate text-sm font-medium">{post.title}</p>
@@ -223,7 +223,7 @@ export default async function DashboardPage() {
                     <Link
                       key={project.id}
                       href={`${ROUTES.projetos.root}/${project.slug}/editar`}
-                      className="flex items-start justify-between gap-3 rounded-lg border p-3 transition-colors hover:bg-muted/50"
+                      className="flex min-w-0 items-start justify-between gap-3 overflow-hidden rounded-lg border p-3 transition-colors hover:bg-muted/50"
                     >
                       <div className="min-w-0">
                         <p className="truncate text-sm font-medium">{project.title}</p>

@@ -1,84 +1,115 @@
 import { NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { requireAuth } from "@/lib/api/require-auth";
 
-// ===================================================
-// GET - Lista todos os projetos
-// ===================================================
 export async function GET() {
-  const supabase = await createSupabaseServerClient(); // ✅ await
+  const { error } = await requireAuth();
+  if (error) return error;
 
-  const { data, error } = await supabase
+  const supabase = await createSupabaseServerClient();
+  const { data, error: dbError } = await supabase
     .from("projects")
     .select("*")
     .order("created_at", { ascending: false });
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  if (dbError) {
+    return NextResponse.json({ error: "Erro ao buscar projetos." }, { status: 500 });
   }
 
   return NextResponse.json(data, { status: 200 });
 }
 
-// ===================================================
-// POST - Cria um novo projeto
-// ===================================================
 export async function POST(request: Request) {
-  const supabase = await createSupabaseServerClient(); // ✅ await
+  const { error } = await requireAuth();
+  if (error) return error;
+
+  const supabase = await createSupabaseServerClient();
   const body = await request.json();
 
-  const { data, error } = await supabase
+  const {
+    title, slug, summary, status, banner_image,
+    highlight_color, start_date, end_date, content, tags,
+  } = body;
+
+  const payload = {
+    title, slug, summary,
+    status: status ?? "draft",
+    banner_image, highlight_color, start_date, end_date, content, tags,
+  };
+
+  const { data, error: dbError } = await supabase
     .from("projects")
-    .insert([body])
+    .insert([payload])
     .select();
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+  if (dbError) {
+    return NextResponse.json({ error: "Erro ao criar projeto." }, { status: 400 });
   }
 
   return NextResponse.json(data, { status: 201 });
 }
 
-// ===================================================
-// PUT - Atualiza um projeto
-// ===================================================
 export async function PUT(request: Request) {
-  const supabase = await createSupabaseServerClient(); // ✅ await
+  const { error } = await requireAuth();
+  if (error) return error;
+
+  const supabase = await createSupabaseServerClient();
   const body = await request.json();
-  const { id, ...updates } = body;
+  const {
+    id, title, slug, summary, status, banner_image,
+    highlight_color, start_date, end_date, content, tags,
+  } = body;
 
   if (!id) {
-    return NextResponse.json({ error: "Missing project ID" }, { status: 400 });
+    return NextResponse.json({ error: "ID obrigatório." }, { status: 400 });
   }
 
-  const { data, error } = await supabase
+  const updates = {
+    ...(title !== undefined && { title }),
+    ...(slug !== undefined && { slug }),
+    ...(summary !== undefined && { summary }),
+    ...(status !== undefined && { status }),
+    ...(banner_image !== undefined && { banner_image }),
+    ...(highlight_color !== undefined && { highlight_color }),
+    ...(start_date !== undefined && { start_date }),
+    ...(end_date !== undefined && { end_date }),
+    ...(content !== undefined && { content }),
+    ...(tags !== undefined && { tags }),
+    updated_at: new Date().toISOString(),
+  };
+
+  const { data, error: dbError } = await supabase
     .from("projects")
     .update(updates)
     .eq("id", id)
     .select();
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+  if (dbError) {
+    return NextResponse.json({ error: "Erro ao atualizar projeto." }, { status: 400 });
   }
 
   return NextResponse.json(data, { status: 200 });
 }
 
-// ===================================================
-// DELETE - Exclui um projeto
-// ===================================================
 export async function DELETE(request: Request) {
-  const supabase = await createSupabaseServerClient(); // ✅ await
+  const { error } = await requireAuth();
+  if (error) return error;
+
+  const supabase = await createSupabaseServerClient();
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
 
   if (!id) {
-    return NextResponse.json({ error: "Missing project ID" }, { status: 400 });
+    return NextResponse.json({ error: "ID obrigatório." }, { status: 400 });
   }
 
-  const { error } = await supabase.from("projects").delete().eq("id", id);
+  const { error: dbError } = await supabase
+    .from("projects")
+    .update({ deleted_at: new Date().toISOString() })
+    .eq("id", id);
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+  if (dbError) {
+    return NextResponse.json({ error: "Erro ao excluir projeto." }, { status: 400 });
   }
 
   return NextResponse.json({ success: true }, { status: 200 });

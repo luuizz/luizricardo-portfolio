@@ -12,6 +12,7 @@ import {
   SidebarMenuItem,
   SidebarMenuSub,
   SidebarMenuSubItem,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { ROUTES } from "@/lib/routes";
 import { cn } from "@/lib/utils";
@@ -24,13 +25,19 @@ export interface NavItem {
   sectionLabel?: string;
 }
 
-function isSubActive(url: string, pathname: string) {
+function isSubActive(url: string, pathname: string, siblings?: { url: string }[]) {
   if (url === "#" || !url) return false;
-  return pathname === url || pathname.startsWith(url + "/");
+  if (pathname === url) return true;
+  if (pathname.startsWith(url + "/")) {
+    // Don't activate the root path if another sibling is an exact match
+    const exactSiblingMatch = siblings?.some((s) => s.url !== url && pathname === s.url);
+    return !exactSiblingMatch;
+  }
+  return false;
 }
 
 function isGroupActive(item: NavItem, pathname: string) {
-  return item.items?.some((sub) => isSubActive(sub.url, pathname)) ?? false;
+  return item.items?.some((sub) => isSubActive(sub.url, pathname, item.items)) ?? false;
 }
 
 export function NavMain({ items }: { items: NavItem[] }) {
@@ -54,9 +61,9 @@ export function NavMain({ items }: { items: NavItem[] }) {
 
   return (
     <SidebarGroup className="p-0">
-      <SidebarMenu className="gap-0 px-2 py-2">
+      <SidebarMenu className="gap-0.5 px-2 py-3">
         {/* Dashboard home */}
-        <SidebarMenuItem className="mb-1">
+        <SidebarMenuItem className="mb-2">
           <SidebarMenuButton
             asChild
             isActive={isHome}
@@ -82,8 +89,11 @@ export function NavMain({ items }: { items: NavItem[] }) {
 
           return (
             <div key={item.title}>
+              {showSection && idx > 0 && (
+                <SidebarSeparator className="my-3" />
+              )}
               {showSection && (
-                <p className="mt-3 mb-1 px-3 text-[10px] font-semibold uppercase tracking-widest text-sidebar-foreground/35 select-none">
+                <p className="mb-1 px-3 text-[10px] font-semibold uppercase tracking-widest text-sidebar-foreground/35 select-none">
                   {item.sectionLabel}
                 </p>
               )}
@@ -129,7 +139,7 @@ export function NavMain({ items }: { items: NavItem[] }) {
                   <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
                     <SidebarMenuSub className="mx-0 mt-0.5 border-0 px-0">
                       {item.items?.map((subItem) => {
-                        const active = isSubActive(subItem.url, pathname);
+                        const active = isSubActive(subItem.url, pathname, item.items);
                         return (
                           <SidebarMenuSubItem key={subItem.title}>
                             <Link
